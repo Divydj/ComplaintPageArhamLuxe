@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Booking Case Form</title>
+  <title>Submit a Booking Case</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
 
   <!-- Styles -->
   <style>
@@ -15,19 +16,26 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    .form-container {
-      max-width: 400px;
-      margin: 80px auto;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 16px;
-      padding: 30px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-      color: white;
-      border: 1px solid rgba(255, 255, 255, 0.18);
+    .form-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
     }
 
-    .form-container h2 {
+    .form-box {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 30px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      width: 90%;
+      max-width: 420px;
+      color: white;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    .form-box h2 {
       text-align: center;
       margin-bottom: 20px;
     }
@@ -35,24 +43,24 @@
     label {
       display: block;
       margin-top: 15px;
-      font-weight: bold;
+      font-weight: 500;
     }
 
     input[type="text"],
     textarea {
       width: 100%;
       padding: 10px;
+      border-radius: 10px;
       border: none;
-      border-radius: 8px;
       margin-top: 5px;
-      font-size: 14px;
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.25);
       color: white;
+      font-size: 14px;
     }
 
     textarea {
       resize: vertical;
-      min-height: 80px;
+      min-height: 100px;
     }
 
     input[type="submit"] {
@@ -61,7 +69,7 @@
       padding: 12px;
       background-color: #00c6ff;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       color: white;
       font-size: 16px;
       cursor: pointer;
@@ -73,63 +81,32 @@
     }
 
     ::placeholder {
-      color: rgba(255, 255, 255, 0.7);
+      color: rgba(255, 255, 255, 0.8);
     }
   </style>
-
-  <!-- Validation Script -->
-  <script>
-    function validateForm(event) {
-      event.preventDefault();
-
-      const bookingId = document.getElementById("00NgK000012NWWz").value.trim();
-      const subject = document.getElementById("subject").value.trim();
-      const description = document.querySelector("textarea[name='description']").value.trim();
-
-      const bookingIdPattern = /^B_ID\d{6}$/;
-
-      if (!bookingIdPattern.test(bookingId)) {
-        alert("Booking ID must be in the format: B_ID followed by 6 digits (e.g., B_ID000001).");
-        return false;
-      }
-
-      if (subject === "") {
-        alert("Subject cannot be empty.");
-        return false;
-      }
-
-      if (description === "") {
-        alert("Description cannot be empty.");
-        return false;
-      }
-
-      event.target.submit();
-    }
-  </script>
 </head>
 <body>
 
-  <div class="form-container">
-    <h2>Submit Booking Case</h2>
-    <form 
-      action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgK000003c3OC" 
-      method="POST" 
-      onsubmit="validateForm(event)"
-    >
-      <input type="hidden" name="orgid" value="00DgK000003c3OC">
-      <input type="hidden" name="retURL" value="http://gmail.com">
+  <div class="form-wrapper">
+    <div class="form-box">
+      <h2>Submit a Booking Case</h2>
+      <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgK000003c3OC" method="POST">
 
-      <label for="00NgK000012NWWz">Booking ID</label>
-      <input id="00NgK000012NWWz" name="00NgK000012NWWz" type="text" maxlength="20" placeholder="e.g., B_ID000001" />
+        <input type="hidden" name="orgid" value="00DgK000003c3OC">
+        <input type="hidden" name="retURL" value="http://gmail.com">
 
-      <label for="subject">Subject</label>
-      <input id="subject" name="subject" type="text" maxlength="80" placeholder="Enter subject" />
+        <label for="00NgK000012NWWz">Booking ID</label>
+        <input id="00NgK000012NWWz" name="00NgK000012NWWz" type="text" maxlength="20" placeholder="e.g., B_ID000131">
 
-      <label for="description">Description</label>
-      <textarea name="description" placeholder="Enter description"></textarea>
+        <label for="subject">Subject</label>
+        <input id="subject" name="subject" type="text" maxlength="80" placeholder="Enter subject">
 
-      <input type="submit" name="submit" value="Submit">
-    </form>
+        <label for="description">Description</label>
+        <textarea name="description" placeholder="Enter case description"></textarea>
+
+        <input type="submit" name="submit" value="Submit Case">
+      </form>
+    </div>
   </div>
 
 </body>
