@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Booking Case Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Styles -->
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .form-container {
+      max-width: 400px;
+      margin: 80px auto;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 30px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      margin-top: 5px;
+      font-size: 14px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    input[type="submit"] {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background-color: #00c6ff;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #0072ff;
+    }
+
+    ::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  </style>
+
+  <!-- Validation Script -->
+  <script>
+    function validateForm(event) {
+      event.preventDefault();
+
+      const bookingId = document.getElementById("00NgK000012NWWz").value.trim();
+      const subject = document.getElementById("subject").value.trim();
+      const description = document.querySelector("textarea[name='description']").value.trim();
+
+      const bookingIdPattern = /^B_ID\d{6}$/;
+
+      if (!bookingIdPattern.test(bookingId)) {
+        alert("Booking ID must be in the format: B_ID followed by 6 digits (e.g., B_ID000001).");
+        return false;
+      }
+
+      if (subject === "") {
+        alert("Subject cannot be empty.");
+        return false;
+      }
+
+      if (description === "") {
+        alert("Description cannot be empty.");
+        return false;
+      }
+
+      event.target.submit();
+    }
+  </script>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Submit Booking Case</h2>
+    <form 
+      action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgK000003c3OC" 
+      method="POST" 
+      onsubmit="validateForm(event)"
+    >
+      <input type="hidden" name="orgid" value="00DgK000003c3OC">
+      <input type="hidden" name="retURL" value="http://gmail.com">
+
+      <label for="00NgK000012NWWz">Booking ID</label>
+      <input id="00NgK000012NWWz" name="00NgK000012NWWz" type="text" maxlength="20" placeholder="e.g., B_ID000001" />
+
+      <label for="subject">Subject</label>
+      <input id="subject" name="subject" type="text" maxlength="80" placeholder="Enter subject" />
+
+      <label for="description">Description</label>
+      <textarea name="description" placeholder="Enter description"></textarea>
+
+      <input type="submit" name="submit" value="Submit">
+    </form>
+  </div>
+
+</body>
+</html>
